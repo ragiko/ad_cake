@@ -1,0 +1,21 @@
+{
+    "name": "treasure2014/ad_xvideos",
+    "authors": [
+        {
+            "name": "Taguchi Hiroaki",
+            "email": "a@example.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.cakephp.org"
+        }
+    ],
+    "require": {
+        "cakephp/cakephp": ">=2.4.9"
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}
