@@ -11,3 +11,5 @@ Vendor/
 composer.phar
 
 .htaccess
+
+Plugin/

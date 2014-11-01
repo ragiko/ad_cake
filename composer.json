@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "cakephp/cakephp": ">=2.4.9"
+        "cakephp/cakephp": ">=2.4.9",
+        "cakedc/tags": "*"
     },
     "config": {
         "vendor-dir": "Vendor/"
