@@ -15,6 +15,8 @@ class ArticlesController extends AppController {
  */
 	public $components = array('Paginator');
 
+	public $uses = array('Article', 'Xvideo');
+
 /**
  * index method
  *
@@ -24,6 +26,26 @@ class ArticlesController extends AppController {
 		$this->Article->recursive = 0;
 		$this->set('articles', $this->Paginator->paginate());
 
+        $title = "bbb";
+        $video_number = 10008; 
+        $date = "2014-11-02 17:38:00";
+        $tags = "teco, teshi, tema";
+
+        $xvideo_id = 1008;
+        $vote = 10;
+        $view = 100;
+        $time = "16:15:00";
+
+        pr($this->_addArticle(
+            $title,
+            $video_number,
+            $date,
+            $tags,
+            $xvideo_id,
+            $vote,
+            $view,
+            $time
+        ));
     }
 
 /**
@@ -110,4 +132,98 @@ class ArticlesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+/**
+ * 記事を追加するメソッド
+ *
+ * @throws 
+ * @param string $title : 記事のタイトル
+ * @param int    $video_number : 記事のid
+ * @param string $date : 記事の更新時刻 (ex-> 2014-11-02 17:38:00)
+ * @param string $tags : 記事のtag : (ex-> a,b,c)
+ * @param int    $xvideo_id : xvideosのid
+ * @param int    $vote : xvideoの投票数
+ * @param int    $view : xvideoの視聴数
+ * @param string $time : xvideoの再生時間 (ex-> 16:15:00)
+ * @return void
+ */
+    private function _addArticle(
+        $title,
+        $video_number,
+        $date,
+        $tags,
+        $xvideo_id,
+        $vote,
+        $view,
+        $time
+    )
+    { 
+
+        // Xvideoのデータ挿入
+        $this->_addXvideo($xvideo_id, $vote, $view, $time);
+
+        // Articleのデータ挿入
+        $options = array('conditions' => array('Article.video_nummber' => $video_number));
+        $article = $this->Article->find('first', $options);
+
+        if (!empty($article)) {
+            $this->log("article : exist");
+            return;
+        }
+
+        $param = array
+            (
+                'Article' => array
+                (
+                    'title' => $title,
+                    'video_nummber' => $video_number,
+                    'date' => $date,
+                    'xvideo_id' => $xvideo_id,
+                    'tags' => $tags
+                )
+            );
+
+        $this->Article->create();
+        $this->Article->save($param);
+
+        $this->log("article : save");
+        return;
+    }
+
+/**
+ * XVIDEOを追加するメソッド
+ *
+ * @throws 
+ * @param int    $id : xvideosのid
+ * @param int    $vote : xvideoの投票数
+ * @param int    $view : xvideoの視聴数
+ * @param string $time : xvideoの再生時間 (ex-> 16:15:00)
+ * @return void
+ */
+	private function _addXvideo($id, $vote, $view, $time) {
+        $options = array('conditions' => array('Xvideo.' . $this->Xvideo->primaryKey => $id));
+        $xvideo = $this->Xvideo->find('first', $options);
+
+        if (!empty($xvideo)) {
+            $this->log("xvideo : exist");
+            return;
+        }
+
+        $param = array
+        (
+            'Xvideo' => array
+            (
+                'id' => $id,
+                'vote' => $vote,
+                'view' => $view,
+                'time' => $time
+            )
+        );
+
+        $this->Xvideo->create();
+        $this->Xvideo->save($param);
+
+        $this->log("xvideo : save");
+        return;
+    }
 }
