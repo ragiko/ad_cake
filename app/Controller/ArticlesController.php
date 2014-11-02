@@ -134,6 +134,50 @@ class ArticlesController extends AppController {
 	}
 
 /**
+ * スクレイピングした記事を保存する(POST)
+ * @throws 
+ * @post title : 記事のタイトル
+ * @post video_number : 記事のid
+ * @post date : 記事の更新時刻 (ex-> 2014-11-02 17:38:00)
+ * @post tags : 記事のtag : (ex-> a,b,c)
+ * @post xvideo_id : xvideosのid
+ * @post vote : xvideoの投票数
+ * @post view : xvideoの視聴数
+ * @post time : xvideoの再生時間 (ex-> 16:15:00)
+ * @return void
+ */
+	public function scriping()
+    {
+        $this->autoRender = false;
+
+		if ($this->request->is('post')) {
+
+            $r = $this->request->data;
+            print_r($r);
+
+            $title = $r['title'];
+            $video_number = $r['video_number'];
+            $date = $r['date'];
+            $tags = $r['tags'];
+            $xvideo_id = $r['xvideo_id'];
+            $vote = $r['vote'];
+            $view = $r['view'];
+            $time = $r['time'];
+
+            $this->_addArticle(
+                $title,
+                $video_number,
+                $date,
+                $tags,
+                $xvideo_id,
+                $vote,
+                $view,
+                $time
+            );
+        }
+    }
+
+/**
  * 記事を追加するメソッド
  *
  * @throws 
