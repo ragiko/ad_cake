@@ -28,12 +28,12 @@ class AppSchema extends CakeSchema {
             'null' => false,
             'default' => null,
         ),
-        'video_id' => array(
+        'video_nummber' => array(
             'type' => 'integer',
             'null' => false,
             'default' => null,
         ),
-        'xvideos_id' => array(
+        'xvideo_id' => array(
             'type' => 'integer',
             'null' => false,
             'default' => null,
@@ -62,12 +62,6 @@ class AppSchema extends CakeSchema {
             'null' => false,
             'default' => null,
             'key' => 'primary',
-            'extra' => 'auto_increment',
-        ),
-        'xvideos_id' => array(
-            'type' => 'integer',
-            'null' => false,
-            'default' => null,
         ),
         'vote' => array(
             'type' => 'integer',

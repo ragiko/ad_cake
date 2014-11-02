@@ -14,6 +14,9 @@
     ],
     "require": {
         "cakephp/cakephp": ">=2.4.9",
+        "cakephp/debug_kit": "2.2.*",
+        "cakedc/migrations": "~2.2",
+        "cakedc/search": "*",
         "cakedc/tags": "*"
     },
     "config": {
