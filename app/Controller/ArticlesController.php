@@ -42,6 +42,7 @@ class ArticlesController extends AppController {
 
         $options = array('conditions' => array('Tagged.foreign_key' => $id));
         $this->set('tags', $this->Article->Tagged->find('all', $options));
+
 	}
 
 /**
