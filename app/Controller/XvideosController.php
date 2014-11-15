@@ -20,7 +20,7 @@ class XvideosController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Xvideo->recursive = 0;
 		$this->set('xvideos', $this->Paginator->paginate());
 	}
@@ -32,7 +32,7 @@ class XvideosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$this->Xvideo->exists($id)) {
 			throw new NotFoundException(__('Invalid xvideo'));
 		}
@@ -45,7 +45,7 @@ class XvideosController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Xvideo->create();
 			if ($this->Xvideo->save($this->request->data)) {
@@ -64,7 +64,7 @@ class XvideosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->Xvideo->exists($id)) {
 			throw new NotFoundException(__('Invalid xvideo'));
 		}
@@ -88,7 +88,7 @@ class XvideosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Xvideo->id = $id;
 		if (!$this->Xvideo->exists()) {
 			throw new NotFoundException(__('Invalid xvideo'));
