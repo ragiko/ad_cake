@@ -101,4 +101,49 @@ class AppSchema extends CakeSchema {
             ),
         ),
     );
+
+
+
+    var $users = array(
+        'id' => array(
+            'type' => 'integer',
+            'null' => false,
+            'default' => null,
+            'key' => 'primary',
+        ),
+        'username' => array(
+            'type' => 'string',
+            'null' => false,
+            'default' => null,
+            'length' => 50,
+        ),
+        'password' => array(
+            'type' => 'string',
+            'null' => false,
+            'default' => null,
+            'length' => 255,
+        ),
+        'role' => array(
+            'type' => 'string',
+            'null' => false,
+            'default' => null,
+            'length' => 20,
+        ),
+        'created' => array(
+            'type' => 'datetime',
+            'null' => false,
+            'default' => null,
+        ),
+        'modified' => array(
+            'type' => 'datetime',
+            'null' => false,
+            'default' => null,
+        ),
+        'indexes' => array(
+            'PRIMARY' => array(
+                'column' => 'id',
+                'unique' => true,
+            ),
+        ),
+    );
 }

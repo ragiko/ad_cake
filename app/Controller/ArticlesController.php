@@ -23,19 +23,9 @@ class ArticlesController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Article->recursive = 0;
 		$this->set('articles', $this->Paginator->paginate());
-
-        $title = "bbb";
-        $video_number = 10008; 
-        $date = "2014-11-02 17:38:00";
-        $tags = "teco, teshi, tema";
-
-        $xvideo_id = 1008;
-        $vote = 10;
-        $view = 100;
-        $time = "16:15:00";
     }
 
 /**
