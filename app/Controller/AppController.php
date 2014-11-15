@@ -21,5 +21,29 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
+
 class AppController extends Controller {
+
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'articles', 'action' => 'add'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'view'),
+            'authorize' => array('Controller') // この行を追加しました
+        )
+    );
+
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+    }
+
+    public function isAuthorized($user) {
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // デフォルトは拒否
+        return false;
+    }
+
 }

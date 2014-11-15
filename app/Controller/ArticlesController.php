@@ -23,7 +23,7 @@ class ArticlesController extends AppController {
  *
  * @return void
  */
-	public function admin_index() {
+	public function index() {
 		$this->Article->recursive = 0;
 		$this->set('articles', $this->Paginator->paginate());
     }
