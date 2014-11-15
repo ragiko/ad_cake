@@ -176,7 +176,12 @@ class ArticlesController extends AppController {
         $this->_addXvideo($xvideo_param);
 
         // Articleのデータ挿入
-        $options = array('conditions' => array('Article.video_nummber' => $article_param['Article']['video_nummber']));
+        $options = array('conditions' => 
+            array(
+                'Article.video_nummber' => $article_param['Article']['video_nummber'],
+                'Article.xvideo_id' => $article_param['Article']['xvideo_id']
+            )
+        );
         $article = $this->Article->find('first', $options);
 
         if (!empty($article)) {
