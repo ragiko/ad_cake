@@ -38,6 +38,12 @@ class AppSchema extends CakeSchema {
             'null' => false,
             'default' => null,
         ),
+        'target_domain' => array(
+            'type' => 'string',
+            'null' => true,
+            'default' => null,
+            'length' => 255,
+        ),
         'created' => array(
             'type' => 'datetime',
             'null' => false,

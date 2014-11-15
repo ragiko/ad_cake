@@ -3,7 +3,8 @@
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($xvideo['Xvideo']['id']); ?>
+            <?php echo h($xvideo['Xvideo']['id']); ?>
+            <iframe src="http://flashservice.xvideos.com/embedframe/<?php echo h($xvideo['Xvideo']['id']); ?>" frameborder=0 width=510 height=400 scrolling=no></iframe>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Vote'); ?></dt>

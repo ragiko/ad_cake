@@ -163,6 +163,8 @@ class ArticlesController extends AppController {
             $vote = $r['vote'];
             $view = $r['view'];
             $time = $r['time'];
+            $target_domain = $r['target_domain'];
+
 
             $this->_addArticle(
                 $title,
@@ -172,7 +174,8 @@ class ArticlesController extends AppController {
                 $xvideo_id,
                 $vote,
                 $view,
-                $time
+                $time,
+                $target_domain
             );
         }
     }
@@ -199,7 +202,8 @@ class ArticlesController extends AppController {
         $xvideo_id,
         $vote,
         $view,
-        $time
+        $time,
+        $target_domain
     )
     { 
 
@@ -214,6 +218,7 @@ class ArticlesController extends AppController {
             $this->log("article : exist");
             return;
         }
+        print_r( $target_domain );
 
         $param = array
             (
@@ -223,7 +228,8 @@ class ArticlesController extends AppController {
                     'video_nummber' => $video_number,
                     'date' => $date,
                     'xvideo_id' => $xvideo_id,
-                    'tags' => $tags
+                    'tags' => $tags,
+                    'target_domain' => $target_domain
                 )
             );
 
