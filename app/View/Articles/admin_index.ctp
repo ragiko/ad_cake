@@ -31,7 +31,7 @@
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $article['Article']['id']), array(), __('Are you sure you want to delete # %s?', $article['Article']['id'])); ?>
 		</td>
 	</tr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 	</tbody>
 	</table>
 	<p>

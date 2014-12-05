@@ -18,6 +18,12 @@ class ArticlesController extends AppController {
 	public $uses = array('Article', 'Xvideo');
 
 
+	public function index() {
+		$this->Article->recursive = 0;
+		$this->set('articles', $this->Paginator->paginate());
+    }
+
+
 /**
  * index method
  *

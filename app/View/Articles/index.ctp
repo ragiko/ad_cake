@@ -1,58 +1,78 @@
-<div class="articles index">
-	<h2><?php echo __('Articles'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('title'); ?></th>
-			<th><?php echo $this->Paginator->sort('date'); ?></th>
-			<th><?php echo $this->Paginator->sort('video_nummber'); ?></th>
-			<th><?php echo $this->Paginator->sort('xvideo_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($articles as $article): ?>
-	<tr>
-		<td><?php echo h($article['Article']['id']); ?>&nbsp;</td>
-		<td><?php echo h($article['Article']['title']); ?>&nbsp;</td>
-		<td><?php echo h($article['Article']['date']); ?>&nbsp;</td>
-		<td><?php echo h($article['Article']['video_nummber']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($article['Xvideo']['id'], array('controller' => 'xvideos', 'action' => 'view', $article['Xvideo']['id'])); ?>
-		</td>
-		<td><?php echo h($article['Article']['created']); ?>&nbsp;</td>
-		<td><?php echo h($article['Article']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $article['Article']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $article['Article']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $article['Article']['id']), array(), __('Are you sure you want to delete # %s?', $article['Article']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+<?php
+// Bootstrap core CSS
+$this->Html->css('bootstrap', null, array('inline' => false));
+// Custom styles for this template
+$this->Html->css('dashboard', null, array('inline' => false));
+?>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item</a></li>
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+        <li><a href="">More navigation</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 class="page-header">サイト</h1>
+
+      <div class="row placeholders">
+        <?php foreach ($articles as $article): ?>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="http://img100-064.xvideos.com/videos/thumbslll/07/72/47/07724700927d81178ff7207ee0942b5a/07724700927d81178ff7207ee0942b5a.26.jpg" alt="" class="img-responsive">
+	        <h4><?php echo h($article['Article']['title']); ?>&nbsp;</h4>
+	        <h4><?php echo h($article['Article']['date']); ?>&nbsp;</h4>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Article'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Xvideos'), array('controller' => 'xvideos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Xvideo'), array('controller' => 'xvideos', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<?php $this->Html->script('bootstrap.min'); ?>
+<?php $this->Html->script('doc.min'); ?>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<?php $this->Html->script('ie10-viewport-bug-workaround'); ?>
