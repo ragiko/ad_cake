@@ -17,6 +17,9 @@ class ArticlesController extends AppController {
 
 	public $uses = array('Article', 'Xvideo');
 
+    public function beforeFilter() {
+        $this->Auth->allow('articles', 'scriping');
+    }
 
 	public function index() {
 		$this->Article->recursive = 0;
@@ -186,9 +189,13 @@ class ArticlesController extends AppController {
         }
 
         $this->Article->create();
-        $this->Article->save($article_param);
+		if ($this->Article->save($article_param)) {
+            $this->log("article : save");
+		} else {
+            $this->log("articles: save error");
+            $this->log($this->Article->validationErrors);
+		}
 
-        $this->log("article : save");
         return;
     }
 
@@ -208,9 +215,13 @@ class ArticlesController extends AppController {
         }
 
         $this->Xvideo->create();
-        $this->Xvideo->save($xvideo_param);
+		if ($this->Xvideo->save($xvideo_param)) {
+            $this->log("xvideos  save");
+		} else {
+            $this->log("xvideos: save error");
+            $this->log($this->Xvideo->validationErrors);
+		}
 
-        $this->log("xvideo : save");
         return;
     }
 
