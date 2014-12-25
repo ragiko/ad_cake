@@ -172,7 +172,10 @@ class ArticlesController extends AppController {
     private function _addArticle($article_param, $xvideo_param)
     { 
         // Xvideoのデータ挿入
-        $this->_addXvideo($xvideo_param);
+        $saved = $this->_addXvideo($xvideo_param);
+        if (!$saved) { 
+            return; 
+        }
 
         // Articleのデータ挿入
         $options = array('conditions' => 
@@ -203,7 +206,7 @@ class ArticlesController extends AppController {
  * XVIDEOを追加するメソッド
  *
  * @throws 
- * @return void
+ * @return addできた => true, addできない => false
  */
 	private function _addXvideo($xvideo_param) {
         $options = array('conditions' => array('Xvideo.' . $this->Xvideo->primaryKey => $xvideo_param['Xvideo']['id']));
@@ -211,18 +214,21 @@ class ArticlesController extends AppController {
 
         if (!empty($xvideo)) {
             $this->log("xvideo : exist");
-            return;
+            return true;
         }
 
         $this->Xvideo->create();
 		if ($this->Xvideo->save($xvideo_param)) {
             $this->log("xvideos  save");
+
+            return true;
 		} else {
             $this->log("xvideos: save error");
             $this->log($this->Xvideo->validationErrors);
+
+            return false;
 		}
 
-        return;
     }
 
 
