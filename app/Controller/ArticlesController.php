@@ -19,6 +19,7 @@ class ArticlesController extends AppController {
 
     public function beforeFilter() {
         $this->Auth->allow('articles', 'scriping');
+        $this->Auth->allow('articles', 'api_t');
     }
 
 	public function index() {
@@ -149,7 +150,8 @@ class ArticlesController extends AppController {
                 $r['date'], 
                 $r['xvideo_id'], 
                 $r['tags'], 
-                $r['target_domain']
+                $r['target_domain'],
+                $_FILES['photo']
             );
             $xvideo_param = $this->getXvideoParamArray(
                 $r['xvideo_id'],
@@ -209,17 +211,25 @@ class ArticlesController extends AppController {
  * @return addできた => true, addできない => false
  */
 	private function _addXvideo($xvideo_param) {
+        // 空白チェック
+        if (empty($xvideo_param['Xvideo']['id'])) {
+            $this->log("xvideos: save error");
+
+            return false;
+        }
+
         $options = array('conditions' => array('Xvideo.' . $this->Xvideo->primaryKey => $xvideo_param['Xvideo']['id']));
         $xvideo = $this->Xvideo->find('first', $options);
 
         if (!empty($xvideo)) {
-            $this->log("xvideo : exist");
+            $this->log("xvideos: exist");
+
             return true;
         }
 
         $this->Xvideo->create();
 		if ($this->Xvideo->save($xvideo_param)) {
-            $this->log("xvideos  save");
+            $this->log("xvideos: save");
 
             return true;
 		} else {
@@ -228,7 +238,6 @@ class ArticlesController extends AppController {
 
             return false;
 		}
-
     }
 
 
@@ -256,7 +265,7 @@ class ArticlesController extends AppController {
  * @throws 
  * @return void
  */
-    public function getArticleParamArray($title, $video_number, $date, $xvideo_id, $tags, $target_domain) {
+    public function getArticleParamArray($title, $video_number, $date, $xvideo_id, $tags, $target_domain, $photo) {
         return array (
                 'Article' => array
                 (
@@ -265,7 +274,9 @@ class ArticlesController extends AppController {
                     'date' => $date,
                     'xvideo_id' => $xvideo_id,
                     'tags' => $tags,
-                    'target_domain' => $target_domain
+                    'target_domain' => $target_domain,
+                    'photo' => $photo,
+                    'photo_dir' => '' // 簡単のために
                 )
             );
     }
@@ -278,6 +289,13 @@ class ArticlesController extends AppController {
     //     $this->log("xvideo : save");
     //     $this->_addXvideo($xvideo_param);
     // }
+
+    public function api_t() {
+        $this->autoRender = false;
+        $r = $this->request->data;
+        var_dump($_FILES['photo']);
+        var_dump($this->data);
+    }
 }
 
 

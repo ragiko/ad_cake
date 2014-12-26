@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "77d070764b75518c9593531a97c23fdc",
+    "hash": "4318d973b39bba3c456b93134c1f171d",
     "packages": [
         {
             "name": "cakedc/migrations",
@@ -132,16 +132,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "2.5.5",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "ce98a1ff5738af6db0f42a3647aaaaa5c3773d24"
+                "reference": "02ca7f5fcb77e18ed0512c847135336fba98398c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/ce98a1ff5738af6db0f42a3647aaaaa5c3773d24",
-                "reference": "ce98a1ff5738af6db0f42a3647aaaaa5c3773d24",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/02ca7f5fcb77e18ed0512c847135336fba98398c",
+                "reference": "02ca7f5fcb77e18ed0512c847135336fba98398c",
                 "shasum": ""
             },
             "require": {
@@ -171,20 +171,20 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-05 02:59:03"
+            "time": "2014-12-23 16:26:27"
         },
         {
             "name": "cakephp/debug_kit",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "61d91e8eac30b7d6eb3d145101ea1622bd6e8c34"
+                "reference": "c91103061d9b7ec3141e642913f88090a292b2bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/61d91e8eac30b7d6eb3d145101ea1622bd6e8c34",
-                "reference": "61d91e8eac30b7d6eb3d145101ea1622bd6e8c34",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/c91103061d9b7ec3141e642913f88090a292b2bf",
+                "reference": "c91103061d9b7ec3141e642913f88090a292b2bf",
                 "shasum": ""
             },
             "require": {
@@ -220,20 +220,20 @@
                 "debug",
                 "kit"
             ],
-            "time": "2014-07-29 01:27:30"
+            "time": "2014-11-22 17:58:32"
         },
         {
             "name": "composer/installers",
-            "version": "v1.0.18",
+            "version": "v1.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067"
+                "reference": "89d77bfbee79e16653f7162c86e602cc188471db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
+                "url": "https://api.github.com/repos/composer/installers/zipball/89d77bfbee79e16653f7162c86e602cc188471db",
+                "reference": "89d77bfbee79e16653f7162c86e602cc188471db",
                 "shasum": ""
             },
             "replace": {
@@ -275,6 +275,7 @@
                 "Hurad",
                 "MODX Evo",
                 "OXID",
+                "Thelia",
                 "WolfCMS",
                 "agl",
                 "annotatecms",
@@ -284,9 +285,11 @@
                 "codeigniter",
                 "concrete5",
                 "croogo",
+                "dokuwiki",
                 "drupal",
                 "elgg",
                 "fuelphp",
+                "grav",
                 "installer",
                 "joomla",
                 "kohana",
@@ -310,7 +313,171 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-08-18 20:00:12"
+            "time": "2014-11-29 01:29:17"
+        },
+        {
+            "name": "josegonzalez/cakephp-upload",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/josegonzalez/cakephp-upload.git",
+                "reference": "fa5d74beb785aba78f1472c7af40c35dedeb24e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/josegonzalez/cakephp-upload/zipball/fa5d74beb785aba78f1472c7af40c35dedeb24e9",
+                "reference": "fa5d74beb785aba78f1472c7af40c35dedeb24e9",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Upload"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Wuerth",
+                    "email": "ravage@bluewin.ch",
+                    "homepage": "https://github.com/ravage84",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jose Diaz-Gonzalez",
+                    "email": "dotenv@josegonzalez.com",
+                    "homepage": "http://josediazgonzalez.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Joshua Paling",
+                    "homepage": "https://github.com/joshuapaling",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "sdoney",
+                    "homepage": "https://github.com/sdoney",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Giuliano B",
+                    "homepage": "https://github.com/giulianob",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Justin Slamka",
+                    "homepage": "https://github.com/slamkajs",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Nathan Tyler",
+                    "homepage": "https://github.com/tylerdigital",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Mirko Chialastri",
+                    "homepage": "https://github.com/hiryu85",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Benjamin Allison",
+                    "homepage": "https://github.com/benjaminallison",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Ariel Patschiki",
+                    "homepage": "https://github.com/arielpts",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "lucfranken",
+                    "homepage": "https://github.com/lucfranken",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "cpierce",
+                    "homepage": "https://github.com/cpierce",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Barry Chapman",
+                    "homepage": "https://github.com/barrychapman",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Thomas Edvalson",
+                    "homepage": "https://github.com/Cruel",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Alejandro Ibarra",
+                    "homepage": "https://github.com/ajibarra",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "simkimsia",
+                    "homepage": "https://github.com/simkimsia",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Callum Macdonald",
+                    "homepage": "https://github.com/chmac",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "David Kullmann",
+                    "homepage": "https://github.com/dkullmann",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Juan Basso",
+                    "homepage": "https://github.com/jrbasso",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Cauan Cabral",
+                    "homepage": "https://github.com/CauanCabral",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Bryan Crowe",
+                    "homepage": "https://github.com/bcrowe",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Simon Brown",
+                    "homepage": "https://github.com/Simes",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "wilsolutions",
+                    "homepage": "https://github.com/wilsolutions",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Graham Watson",
+                    "homepage": "https://github.com/PhantomWatson",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "ceallred",
+                    "homepage": "https://github.com/ceallred",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "CakePHP plugin to handle file uploading sans ridiculous automagic",
+            "homepage": "http://github.com/josegonzalez/upload",
+            "keywords": [
+                "Behavior",
+                "cakephp",
+                "files",
+                "upload"
+            ],
+            "time": "2013-09-20 09:33:52"
         }
     ],
     "packages-dev": [],

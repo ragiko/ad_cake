@@ -44,6 +44,18 @@ class AppSchema extends CakeSchema {
             'default' => null,
             'length' => 255,
         ),
+        'photo' => array(
+            'type' => 'string',
+            'null' => false,
+            'default' => null,
+            'length' => 255,
+        ),
+        'photo_dir' => array(
+            'type' => 'string',
+            'null' => false,
+            'default' => null,
+            'length' => 255,
+        ),
         'created' => array(
             'type' => 'datetime',
             'null' => false,

@@ -72,5 +72,22 @@ class Article extends AppModel {
 		)
 	);
 
-    public $actsAs = array('Tags.Taggable');
+    // 参考: http://tagamidaiki.com/cakephp2-upload-plugin-upload/
+    public $actsAs = array(
+        'Upload.Upload' => array(
+            'photo' => array(
+                'fields' => array(
+                    'dir' => 'photo_dir'
+                ),
+                'thumbnailSizes' => array(
+                    'thumb150' => '150x150',
+                    'normal' => '200x200',
+                    'big' => '500x500'
+                ),
+                'thumbnailMethod' => 'php'
+            )
+        ),
+        'Tags.Taggable'
+    );
+
 }

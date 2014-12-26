@@ -13,3 +13,5 @@ composer.phar
 .htaccess
 
 Plugin/
+
+files/
