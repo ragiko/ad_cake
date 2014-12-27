@@ -22,12 +22,19 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
+        // Bootstrap core CSS
+        $this->Html->css('bootstrap', null, array('inline' => false));
+        // Custom styles for this template
+        $this->Html->css('dashboard', null, array('inline' => false));
+
 		echo $this->Html->meta('icon');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-	?>
+    ?>
+
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <?php $this->Html->script('ie-emulation-modes-warning', array('inline' => false)); ?>
@@ -41,13 +48,50 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php // echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h1></h1>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Project name</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                  </ul>
+                  <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                  </form>
+                </div>
+              </div>
+            </nav>
 		</div>
 		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-2 sidebar">
+                  <h3>タグリスト</h3>
+                  <ul class="nav nav-sidebar">
+                    <li><a href="#">巨乳(20)</a></li>
+                    <li><a href="#">爆乳(102)</a></li>
+                    <li><a href="#">フェラ(32)</a></li>
+                    <li><a href="#">フェラ(32)</a></li>
+                  </ul>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 main">
+            		<?php echo $this->Session->flash(); ?>
+            		<?php echo $this->fetch('content'); ?>
+                </div>
+              </div>
+            </div>
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(
@@ -59,5 +103,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <?php $this->Html->script('bootstrap.min'); ?>
+    <?php $this->Html->script('doc.min'); ?>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <?php $this->Html->script('ie10-viewport-bug-workaround'); ?>
 </body>
 </html>
