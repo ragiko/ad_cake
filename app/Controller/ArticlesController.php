@@ -21,8 +21,12 @@ class ArticlesController extends AppController {
         $this->Auth->allow('index', 'view', 'scriping', 'api_t');
     }
 
+    public $paginate = array(
+        'limit' => 29
+    );
+
 	public function index() {
-		$this->set('articles', $this->Paginator->paginate());
+		$this->set('articles', $this->paginate('Article'));
     }
 
 /**
