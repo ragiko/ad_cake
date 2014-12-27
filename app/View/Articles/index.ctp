@@ -5,12 +5,6 @@ $this->Html->css('bootstrap', null, array('inline' => false));
 $this->Html->css('dashboard', null, array('inline' => false));
 ?>
 
-<pre>
-<?php
-    print_r($articles);
-?>
-</pre>
-
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -38,27 +32,15 @@ $this->Html->css('dashboard', null, array('inline' => false));
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
+    <div class="col-xs-2 sidebar">
+      <h3>タグリスト</h3>
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item</a></li>
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-        <li><a href="">More navigation</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
+        <li><a href="#">巨乳(20)</a></li>
+        <li><a href="#">爆乳(102)</a></li>
+        <li><a href="#">フェラ(32)</a></li>
       </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="col-md-10 col-xs-offset-2 main">
       <h1 class="page-header">サイト</h1>
 
       <div class="row placeholders">
@@ -67,6 +49,7 @@ $this->Html->css('dashboard', null, array('inline' => false));
             <img src="<?php echo "/files/article/photo/{$article['Article']['photo_dir']}/{$article['Article']['photo']}"; ?>" alt="" class="img-responsive">
 	        <h4><?php echo h($article['Article']['title']); ?>&nbsp;</h4>
 	        <h4><?php echo h($article['Article']['date']); ?>&nbsp;</h4>
+	        <h4>tag: <?php echo h($article['Article']['tags']); ?>&nbsp;</h4>
 	        <h4>vote: <?php echo h($article['Xvideo']['vote']); ?>&nbsp;</h4>
 	        <h4>view: <?php echo h($article['Xvideo']['view']); ?>&nbsp;</h4>
 	        <h4>time: <?php echo h($article['Xvideo']['time']); ?>&nbsp;</h4>

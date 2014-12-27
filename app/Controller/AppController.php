@@ -33,9 +33,22 @@ class AppController extends Controller {
         )
     );
 
+    public function beforeRender()
+    {
+        /**
+         * 管理者用レイアウトを呼び出す
+         * 
+         */
+        // 参考: http://wataame.sumomo.ne.jp/archives/3782
+        if ( Configure::read('Routing.prefixes') && !empty($this->params['admin']) ) {
+            $this->layout = 'admin';
+        }
+    }
+
     public function beforeFilter() {
         $this->Auth->allow('index', 'view');
     }
+
 
     public function isAuthorized($user) {
         if (isset($user['role']) && $user['role'] === 'admin') {
