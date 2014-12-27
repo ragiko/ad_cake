@@ -9,7 +9,7 @@
               echo $this->Html->link(
                   $this->Html->image(
                       "/files/article/photo/{$article['Article']['photo_dir']}/{$article['Article']['photo']}",
-                       array('width'=>'','height'=>'','alt'=>'', 'class'=>'xv-thumb img-responsive')
+                       array('width'=>'','height'=>'','alt'=>'', 'id'=>$article['Xvideo']['id'], 'class'=>'xv-thumb img-responsive')
                   ),
                   array('action' => 'view', $article['Article']['id']), // 必須
                   array('escape'=>false)

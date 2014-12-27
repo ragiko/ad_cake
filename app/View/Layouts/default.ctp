@@ -108,9 +108,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <?php $this->Html->script('bootstrap.min'); ?>
-    <?php $this->Html->script('doc.min'); ?>
+    <?php echo $this->Html->script('slider'); ?>
+    <?php echo $this->Html->script('bootstrap.min'); ?>
+    <?php echo $this->Html->script('doc.min'); ?>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <?php $this->Html->script('ie10-viewport-bug-workaround'); ?>
+    <?php echo $this->Html->script('ie10-viewport-bug-workaround'); ?>
 </body>
 </html>
