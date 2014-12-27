@@ -38,21 +38,56 @@ $this->Html->css('dashboard', null, array('inline' => false));
         <li><a href="#">巨乳(20)</a></li>
         <li><a href="#">爆乳(102)</a></li>
         <li><a href="#">フェラ(32)</a></li>
+        <li><a href="#">フェラ(32)</a></li>
       </ul>
     </div>
-    <div class="col-md-10 col-xs-offset-2 main">
+    <div class="col-xs-10 col-xs-offset-2 main">
       <h1 class="page-header">サイト</h1>
 
       <div class="row placeholders">
         <?php foreach ($articles as $article): ?>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="<?php echo "/files/article/photo/{$article['Article']['photo_dir']}/{$article['Article']['photo']}"; ?>" alt="" class="img-responsive">
-	        <h4><?php echo h($article['Article']['title']); ?>&nbsp;</h4>
-	        <h4><?php echo h($article['Article']['date']); ?>&nbsp;</h4>
-	        <h4>tag: <?php echo h($article['Article']['tags']); ?>&nbsp;</h4>
-	        <h4>vote: <?php echo h($article['Xvideo']['vote']); ?>&nbsp;</h4>
-	        <h4>view: <?php echo h($article['Xvideo']['view']); ?>&nbsp;</h4>
-	        <h4>time: <?php echo h($article['Xvideo']['time']); ?>&nbsp;</h4>
+        <div class="col-xs-2 placeholder-wrapper">
+            <div class="placeholder">
+                <div class="placeholder-first">
+                    <?php 
+                    echo $this->Html->link(
+                        $this->Html->image(
+                            "/files/article/photo/{$article['Article']['photo_dir']}/{$article['Article']['photo']}",
+                             array('width'=>'','height'=>'','alt'=>'', 'class'=>'xv-thumb img-responsive')
+                        ),
+                        array('action' => 'view', $article['Article']['id']), // 必須
+                        array('escape'=>false)
+                    ); 
+                    ?>
+                    <span class="label-time"><?php echo h($article['Xvideo']['time']); ?></span>
+                    <span class="label-site"><img src="/img/xv.png" alt="" width="65" height="16"></span>
+                    <p>
+                        <img width="14" height="5" alt="タグ" src="/img/tag.png">
+                    </p>
+                    <ul>
+                        <?php foreach (explode(",", $article['Article']['tags']) as $tag): ?>
+                            <li>
+                                <a href="" rel="nofollow" target="_blank"><?php echo $tag ?></a> 
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="placeholder-icons">
+                        <span class="glyphicon glyphicon-thumbs-up icon-vote" aria-hidden="true"></span><span class="label-vote"><?php echo h($article['Xvideo']['vote']); ?></span>
+                        <span class="glyphicon glyphicon-eye-open icon-view" aria-hidden="true"></span><span class="label-view"><?php echo h($article['Xvideo']['view']); ?></span>
+                    </div>
+                </div>
+                <div class="placeholder-second">
+                    <h2>
+                        <?php 
+                        echo $this->Html->link(
+                            h($article['Article']['title']),
+                            array('action' => 'view', $article['Article']['id']) // 必須
+                        ); 
+                        ?>
+                    </h2>
+                    <p class="label-date"><?php echo h($article['Article']['date']); ?> 更新</p>
+                </div>
+            </div>
         </div>
         <?php endforeach; ?>
       </div>

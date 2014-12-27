@@ -5,6 +5,24 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  color: #101818;
+  background-image: url("/img/bg.jpg");
+  background-position: center top;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Osaka,Helvetica,Verdana,sans-serif;
+    font-size: 100%;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
 }
 
 
@@ -49,7 +67,6 @@ body {
     margin: 0px 5px;
     padding: 5px 10px;
     font-weight: normal;
-
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -84,9 +101,6 @@ body {
   background-color: #428bca;
 }
 
-
-
-
 /*
  * Main content
  */
@@ -108,10 +122,12 @@ body {
 /*
  * Placeholder dashboard ideas
  */
+.col-xs-2.placeholder-wrapper {
+    padding: 2px;
+}
 
 .placeholders {
   margin-bottom: 30px;
-  text-align: center;
 }
 .placeholders h4 {
   margin-bottom: 0;
@@ -119,8 +135,76 @@ body {
 .placeholder {
   margin-bottom: 20px;
 }
-.placeholder img {
+.placeholder a {
+    text-decoration: underline;
+    color: #153053;
+    outline-style: none;
+}
+.placeholder .placeholder-first {
+
+    padding: 5px;
+    padding-bottom: 15px;
+    background-color: white;
+}
+.placeholder .placeholder-first img.xv-thumb {
   display: inline-block;
-  border-radius: 50%;
+}
+.placeholder .placeholder-first span.label-time {
+    color: #FFF;
+    background-image: url("/img/bg_time.png");
+    display: block;
+    height: 16px;
+    width: 69px;
+    left: 77px;
+    top: 95px;
+    position: absolute;
+    line-height: 16px;
+    text-align: center;
+}
+.placeholder .placeholder-first span.label-site {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+}
+.placeholder .placeholder-first  ul {
+    height: 29px;
+    overflow: hidden;
+}
+.placeholder .placeholder-first  li {
+    font-size: 10px;
+    margin-right: 5px;
+    display: inline;
+}
+.placeholder .placeholder-first .placeholder-icons {
+    padding-top: 10px;
+    color: #7f8c8d;
+}
+.placeholder .placeholder-first span.label-vote,
+.placeholder .placeholder-first span.label-view {
+    font-size: 10px;
+    margin-left: 3px;
+}
+.placeholder .placeholder-first span.icon-vote,
+.placeholder .placeholder-first span.icon-view {
+    margin-left: 3px;
 }
 
+.placeholder .placeholder-second {
+    padding: 0px 5px;
+}
+.placeholder .placeholder-second h2 {
+    font-size: 12px;
+    margin: 0px;
+    margin-top: 10px;
+    padding: 0px;
+    height: 32px;
+    overflow: hidden;
+}
+.placeholder .placeholder-second h2 > a {
+    line-height: 1.35;
+}
+.placeholder .placeholder-second p.label-date {
+    padding-top: 10px;
+    font-size: 10px;
+}

@@ -18,13 +18,27 @@ class ArticlesController extends AppController {
 	public $uses = array('Article', 'Xvideo');
 
     public function beforeFilter() {
-        $this->Auth->allow('index', 'scriping', 'api_t');
+        $this->Auth->allow('index', 'view', 'scriping', 'api_t');
     }
 
 	public function index() {
 		$this->set('articles', $this->Paginator->paginate());
     }
 
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->Article->exists($id)) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$options = array('conditions' => array('Article.' . $this->Article->primaryKey => $id));
+		$this->set('article', $this->Article->find('first', $options));
+	}
 
 /**
  * index method
@@ -34,6 +48,8 @@ class ArticlesController extends AppController {
 	public function admin_index() {
 		$this->set('articles', $this->Paginator->paginate());
     }
+
+
 
 /**
  * view method
