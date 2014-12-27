@@ -18,12 +18,10 @@ class ArticlesController extends AppController {
 	public $uses = array('Article', 'Xvideo');
 
     public function beforeFilter() {
-        $this->Auth->allow('articles', 'scriping');
-        $this->Auth->allow('articles', 'api_t');
+        $this->Auth->allow('index', 'scriping', 'api_t');
     }
 
 	public function index() {
-		$this->Article->recursive = 0;
 		$this->set('articles', $this->Paginator->paginate());
     }
 
@@ -34,7 +32,6 @@ class ArticlesController extends AppController {
  * @return void
  */
 	public function admin_index() {
-		$this->Article->recursive = 0;
 		$this->set('articles', $this->Paginator->paginate());
     }
 
@@ -54,7 +51,6 @@ class ArticlesController extends AppController {
 
         $options = array('conditions' => array('Tagged.foreign_key' => $id));
         $this->set('tags', $this->Article->Tagged->find('all', $options));
-
 	}
 
 /**
@@ -293,8 +289,8 @@ class ArticlesController extends AppController {
     public function api_t() {
         $this->autoRender = false;
         $r = $this->request->data;
-        var_dump($_FILES['photo']);
-        var_dump($this->data);
+        $this->log($_FILES['photo']);
+        $this->log($r);
     }
 }
 

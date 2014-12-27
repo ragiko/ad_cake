@@ -20,7 +20,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // ユーザー自身による登録とログアウトを許可する
-        $this->Auth->allow('logout');
+        $this->Auth->allow('admin_add', 'admin_logout');
     }
 
     public function admin_login() {

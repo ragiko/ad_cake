@@ -5,6 +5,12 @@ $this->Html->css('bootstrap', null, array('inline' => false));
 $this->Html->css('dashboard', null, array('inline' => false));
 ?>
 
+<pre>
+<?php
+    print_r($articles);
+?>
+</pre>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -58,9 +64,12 @@ $this->Html->css('dashboard', null, array('inline' => false));
       <div class="row placeholders">
         <?php foreach ($articles as $article): ?>
         <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="http://img100-064.xvideos.com/videos/thumbslll/07/72/47/07724700927d81178ff7207ee0942b5a/07724700927d81178ff7207ee0942b5a.26.jpg" alt="" class="img-responsive">
+            <img src="<?php echo "/files/article/photo/{$article['Article']['photo_dir']}/{$article['Article']['photo']}"; ?>" alt="" class="img-responsive">
 	        <h4><?php echo h($article['Article']['title']); ?>&nbsp;</h4>
 	        <h4><?php echo h($article['Article']['date']); ?>&nbsp;</h4>
+	        <h4>vote: <?php echo h($article['Xvideo']['vote']); ?>&nbsp;</h4>
+	        <h4>view: <?php echo h($article['Xvideo']['view']); ?>&nbsp;</h4>
+	        <h4>time: <?php echo h($article['Xvideo']['time']); ?>&nbsp;</h4>
         </div>
         <?php endforeach; ?>
       </div>

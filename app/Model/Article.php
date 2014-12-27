@@ -1,5 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
+
 /**
  * Article Model
  *
@@ -87,7 +88,9 @@ class Article extends AppModel {
                 'thumbnailMethod' => 'php'
             )
         ),
-        'Tags.Taggable'
+        'Tags.Taggable' => array(
+            'unsetInAfterFind' => true
+        )
     );
 
 }
