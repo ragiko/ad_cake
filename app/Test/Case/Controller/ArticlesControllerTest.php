@@ -14,9 +14,9 @@ class ArticlesControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.article',
-		'app.xvideo'
-		// 'app.tag',
-		// 'app.tagged'
+		'app.xvideo',
+        'plugin.tags.tagged',
+        'plugin.tags.tag'
 	);
 
 
@@ -37,131 +37,270 @@ class ArticlesControllerTest extends ControllerTestCase {
 		$this->Articles = new ArticlesController();
 	}
 
-	public function test_addXvideoのsave() {
-        $photo = array(
-            'file_valid' => array( 
-                'name' => '株式会社ディー・エヌ・エー　新卒採用マイページ予約票 2014-12-08 21-59-16.png', 
-                'tmp_name' => '/tmp/phpz23BJo', 
-                'type' => 'image/png',
-                'size' => 165513, 
-                'error' => 0
-            ) 
-        );
-        $xvideo_pram = $this->Articles->getArticleParamArray(
-            "タイトル", 
-            "1", 
-            "2014-11-02 16:03:00", 
-            "1", 
-            '2\,3\,4', 
-            "http://~~",
-            $photo);
+	public function test_addXvideoのsaveが上手く行く時() {
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","1","1","16:15:00");
 
         // 参考: http://qiita.com/kumazo@github/items/45d956b0e66cd0b5e0bd
         $_addXvideo = new ReflectionMethod($this->Articles, '_addXvideo');
         $_addXvideo->setAccessible(true);
-        $result = $_addXvideo->invokeArgs($this->Articles, $xvideo_pram); 
-        debug($result);
-        $this->assertEquals('1', '1');
+        // invokeのparamはarrayで囲む
+        // 参考: http://phpspot.net/php/man/php/reflectionmethod.invokeargs.html
+        $result = $_addXvideo->invokeArgs($this->Articles, array($xvideo_param)); 
+        $this->assertEquals(true, $result);
 	}
 
+	public function test_addXvideoのsaveでxvideoのidがない() {
+        $xvideo_param = $this->Articles->getXvideoParamArray("","1","1","16:15:00");
 
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-		$this->markTestIncomplete('testIndex not implemented.');
+        $_addXvideo = new ReflectionMethod($this->Articles, '_addXvideo');
+        $_addXvideo->setAccessible(true);
+        $result = $_addXvideo->invokeArgs($this->Articles, array($xvideo_param)); 
+        $this->assertEquals(false, $result);
 	}
 
-/**
- * testView method
- *
- * @return void
- */
-	public function testView() {
-		$this->markTestIncomplete('testView not implemented.');
+    public function test_addXvideoのsaveでviewのフォーマットが悪い() {
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","aa","1","16:15:00");
+
+        $_addXvideo = new ReflectionMethod($this->Articles, '_addXvideo');
+        $_addXvideo->setAccessible(true);
+        $result = $_addXvideo->invokeArgs($this->Articles, array($xvideo_param)); 
+        $this->assertEquals(false, $result);
+    }
+
+	public function test_addXvideoのsaveでtimeのフォーマットが悪い() {
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","1","1","aaa");
+
+        $_addXvideo = new ReflectionMethod($this->Articles, '_addXvideo');
+        $_addXvideo->setAccessible(true);
+        $result = $_addXvideo->invokeArgs($this->Articles, array($xvideo_param)); 
+        $this->assertEquals(false, $result);
 	}
 
-/**
- * testAdminIndex method
- *
- * @return void
- */
-	public function testAdminIndex() {
-		$this->markTestIncomplete('testAdminIndex not implemented.');
+	public function test_addXvideoのsaveでparamの情報が何もない() {
+        $xvideo_param = $this->Articles->getXvideoParamArray("","","","");
+
+        $_addXvideo = new ReflectionMethod($this->Articles, '_addXvideo');
+        $_addXvideo->setAccessible(true);
+        $result = $_addXvideo->invokeArgs($this->Articles, array($xvideo_param)); 
+        $this->assertEquals(false, $result);
 	}
 
-/**
- * testAdminView method
- *
- * @return void
- */
-	public function testAdminView() {
-		$this->markTestIncomplete('testAdminView not implemented.');
-	}
+    public function test_addArticleでsaveが上手く行く() {
+        // テストのアップロード用の画像
+        copy( '/tmp/hym634t','/tmp/hym634'); 
 
-/**
- * testAdminAdd method
- *
- * @return void
- */
-	public function testAdminAdd() {
-		$this->markTestIncomplete('testAdminAdd not implemented.');
-	}
+        $photo = array(
+            "name" => "test.png",
+            "type" => "image/jpg",
+            "tmp_name" => "/tmp/hym634" ,
+            "error" => 0,
+            "size" => 165513
+        );
 
-/**
- * testAdminEdit method
- *
- * @return void
- */
-	public function testAdminEdit() {
-		$this->markTestIncomplete('testAdminEdit not implemented.');
-	}
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","1","1","16:15:00");
+        $article_param = $this->Articles->getArticleParamArray(
+            "test", // title
+            "1", // video number 
+            "2014-11-02 16:03:00", // date
+            "1",// xvideo_id, 
+            "a,b,c", // tags, 
+            "http://example.com", // target_domain
+            $photo
+        );
 
-/**
- * testAdminDelete method
- *
- * @return void
- */
-	public function testAdminDelete() {
-		$this->markTestIncomplete('testAdminDelete not implemented.');
-	}
+        $_addArticle = new ReflectionMethod($this->Articles, '_addArticle');
+        $_addArticle->setAccessible(true);
+        $result = $_addArticle->invokeArgs($this->Articles, array($article_param, $xvideo_param)); 
+        $this->assertEquals(true, $result);
+    }
 
-/**
- * testScriping method
- *
- * @return void
- */
-	public function testScriping() {
-		$this->markTestIncomplete('testScriping not implemented.');
-	}
+    public function test_addArticleでxvideoのsaveが上手く行かないとsaveしない() {
+        // テストのアップロード用の画像
+        copy( '/tmp/hym634t','/tmp/hym634'); 
 
-/**
- * testGetXvideoParamArray method
- *
- * @return void
- */
-	public function testGetXvideoParamArray() {
-		$this->markTestIncomplete('testGetXvideoParamArray not implemented.');
-	}
+        $photo = array(
+            "name" => "test.png",
+            "type" => "image/jpg",
+            "tmp_name" => "/tmp/hym634" ,
+            "error" => 0,
+            "size" => 165513
+        );
 
-/**
- * testGetArticleParamArray method
- *
- * @return void
- */
-	public function testGetArticleParamArray() {
-		$this->markTestIncomplete('testGetArticleParamArray not implemented.');
-	}
+        $xvideo_param = $this->Articles->getXvideoParamArray("","1","1","16:15:00");
+        $article_param = $this->Articles->getArticleParamArray(
+            "test", // title
+            "1", // video number 
+            "2014-11-02 16:03:00", // date
+            "1",// xvideo_id, 
+            "a,b,c", // tags, 
+            "http://example.com", // target_domain
+            $photo
+        );
 
-/**
- * testApiT method
- *
- * @return void
- */
-	public function testApiT() {
-		$this->markTestIncomplete('testApiT not implemented.');
-	}
+        $_addArticle = new ReflectionMethod($this->Articles, '_addArticle');
+        $_addArticle->setAccessible(true);
+        $result = $_addArticle->invokeArgs($this->Articles, array($article_param, $xvideo_param)); 
+        $this->assertEquals(false, $result);
+    }
 
+    public function test_addArticleでariticleのtitleがないと保存しない() {
+        // テストのアップロード用の画像
+        copy( '/tmp/hym634t','/tmp/hym634'); 
+
+        $photo = array(
+            "name" => "test.png",
+            "type" => "image/jpg",
+            "tmp_name" => "/tmp/hym634" ,
+            "error" => 0,
+            "size" => 165513
+        );
+
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","1","1","16:15:00");
+        $article_param = $this->Articles->getArticleParamArray(
+            "", // title
+            "2", // video number 
+            "2014-11-02 16:03:00", // date
+            "2",// xvideo_id, 
+            "a,b,c", // tags, 
+            "http://example.com", // target_domain
+            $photo
+        );
+
+        $_addArticle = new ReflectionMethod($this->Articles, '_addArticle');
+        $_addArticle->setAccessible(true);
+        $result = $_addArticle->invokeArgs($this->Articles, array($article_param, $xvideo_param)); 
+        $this->assertEquals(false, $result);
+    }
+
+    public function test_addArticleでariticleのphotoがないと保存しない() {
+        // テストのアップロード用の画像
+        copy( '/tmp/hym634t','/tmp/hym634'); 
+
+        $photo = array(
+            "name" => "test.png",
+            "type" => "image/jpg",
+            "tmp_name" => "/tmp/hym634" ,
+            "error" => 0,
+            "size" => 165513
+        );
+
+        $xvideo_param = $this->Articles->getXvideoParamArray("2","1","1","16:15:00");
+        $article_param = $this->Articles->getArticleParamArray(
+            "a", // title
+            "2", // video number 
+            "2014-11-02 16:03:00", // date
+            "2",// xvideo_id, 
+            "a,b,c", // tags, 
+            "http://example.com", // target_domain
+            ""
+        );
+
+        $_addArticle = new ReflectionMethod($this->Articles, '_addArticle');
+        $_addArticle->setAccessible(true);
+        $result = $_addArticle->invokeArgs($this->Articles, array($article_param, $xvideo_param)); 
+        $this->assertEquals(false, $result);
+    }
+
+
+
+
+// /**
+//  * testIndex method
+//  *
+//  * @return void
+//  */
+// 	public function testIndex() {
+// 		$this->markTestIncomplete('testIndex not implemented.');
+// 	}
+// 
+// /**
+//  * testView method
+//  *
+//  * @return void
+//  */
+// 	public function testView() {
+// 		$this->markTestIncomplete('testView not implemented.');
+// 	}
+// 
+// /**
+//  * testAdminIndex method
+//  *
+//  * @return void
+//  */
+// 	public function testAdminIndex() {
+// 		$this->markTestIncomplete('testAdminIndex not implemented.');
+// 	}
+// 
+// /**
+//  * testAdminView method
+//  *
+//  * @return void
+//  */
+// 	public function testAdminView() {
+// 		$this->markTestIncomplete('testAdminView not implemented.');
+// 	}
+// 
+// /**
+//  * testAdminAdd method
+//  *
+//  * @return void
+//  */
+// 	public function testAdminAdd() {
+// 		$this->markTestIncomplete('testAdminAdd not implemented.');
+// 	}
+// 
+// /**
+//  * testAdminEdit method
+//  *
+//  * @return void
+//  */
+// 	public function testAdminEdit() {
+// 		$this->markTestIncomplete('testAdminEdit not implemented.');
+// 	}
+// 
+// /**
+//  * testAdminDelete method
+//  *
+//  * @return void
+//  */
+// 	public function testAdminDelete() {
+// 		$this->markTestIncomplete('testAdminDelete not implemented.');
+// 	}
+// 
+// /**
+//  * testScriping method
+//  *
+//  * @return void
+//  */
+// 	public function testScriping() {
+// 		$this->markTestIncomplete('testScriping not implemented.');
+// 	}
+// 
+// /**
+//  * testGetXvideoParamArray method
+//  *
+//  * @return void
+//  */
+// 	public function testGetXvideoParamArray() {
+// 		$this->markTestIncomplete('testGetXvideoParamArray not implemented.');
+// 	}
+// 
+// /**
+//  * testGetArticleParamArray method
+//  *
+//  * @return void
+//  */
+// 	public function testGetArticleParamArray() {
+// 		$this->markTestIncomplete('testGetArticleParamArray not implemented.');
+// 	}
+// 
+// /**
+//  * testApiT method
+//  *
+//  * @return void
+//  */
+// 	public function testApiT() {
+// 		$this->markTestIncomplete('testApiT not implemented.');
+// 	}
+// 
 }

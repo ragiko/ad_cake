@@ -185,14 +185,15 @@ class ArticlesController extends AppController {
  * 記事を追加するメソッド
  *
  * @throws 
- * @return void
+ * @return saveが完了したか? (existしているときもtrue)
  */
     private function _addArticle($article_param, $xvideo_param)
     { 
+        $this->log($xvideo_param);
         // Xvideoのデータ挿入
         $saved = $this->_addXvideo($xvideo_param);
         if (!$saved) { 
-            return; 
+            return false; 
         }
 
         // Articleのデータ挿入
@@ -206,18 +207,21 @@ class ArticlesController extends AppController {
 
         if (!empty($article)) {
             $this->log("article : exist");
-            return;
+            return true;
         }
 
         $this->Article->create();
+
+            $this->log($article_param);
 		if ($this->Article->save($article_param)) {
             $this->log("article : save");
+            return true;
 		} else {
             $this->log("articles: save error");
             $this->log($this->Article->validationErrors);
+            return false;
 		}
 
-        return;
     }
 
 /**
@@ -227,9 +231,11 @@ class ArticlesController extends AppController {
  * @return addできた => true, addできない => false
  */
 	private function _addXvideo($xvideo_param) {
+        $this->log($xvideo_param);
         // 空白チェック
         if (empty($xvideo_param['Xvideo']['id'])) {
             $this->log("xvideos: save error");
+            $this->log($this->Xvideo->validationErrors);
 
             return false;
         }
